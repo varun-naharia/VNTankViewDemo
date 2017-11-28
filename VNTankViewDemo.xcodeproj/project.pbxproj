@@ -14,6 +14,8 @@
 		ABBA10251FCD52170080AC6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABBA10231FCD52170080AC6B /* LaunchScreen.storyboard */; };
 		ABBA10301FCD52170080AC6B /* VNTankViewDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBA102F1FCD52170080AC6B /* VNTankViewDemoTests.swift */; };
 		ABBA103B1FCD52170080AC6B /* VNTankViewDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBA103A1FCD52170080AC6B /* VNTankViewDemoUITests.swift */; };
+		ABBA104A1FCD52340080AC6B /* VNTankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBA10491FCD52340080AC6B /* VNTankView.swift */; };
+		ABBA104C1FCD52470080AC6B /* VNTankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABBA104B1FCD52470080AC6B /* VNTankView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		ABBA10361FCD52170080AC6B /* VNTankViewDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VNTankViewDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABBA103A1FCD52170080AC6B /* VNTankViewDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNTankViewDemoUITests.swift; sourceTree = "<group>"; };
 		ABBA103C1FCD52170080AC6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABBA10491FCD52340080AC6B /* VNTankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNTankView.swift; sourceTree = "<group>"; };
+		ABBA104B1FCD52470080AC6B /* VNTankView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VNTankView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 		ABBA10191FCD52170080AC6B /* VNTankViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				ABBA10481FCD521D0080AC6B /* VNTankView */,
 				ABBA101A1FCD52170080AC6B /* AppDelegate.swift */,
 				ABBA101C1FCD52170080AC6B /* ViewController.swift */,
 				ABBA101E1FCD52170080AC6B /* Main.storyboard */,
@@ -123,6 +128,15 @@
 				ABBA103C1FCD52170080AC6B /* Info.plist */,
 			);
 			path = VNTankViewDemoUITests;
+			sourceTree = "<group>";
+		};
+		ABBA10481FCD521D0080AC6B /* VNTankView */ = {
+			isa = PBXGroup;
+			children = (
+				ABBA10491FCD52340080AC6B /* VNTankView.swift */,
+				ABBA104B1FCD52470080AC6B /* VNTankView.xib */,
+			);
+			path = VNTankView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABBA104C1FCD52470080AC6B /* VNTankView.xib in Resources */,
 				ABBA10251FCD52170080AC6B /* LaunchScreen.storyboard in Resources */,
 				ABBA10221FCD52170080AC6B /* Assets.xcassets in Resources */,
 				ABBA10201FCD52170080AC6B /* Main.storyboard in Resources */,
@@ -259,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABBA104A1FCD52340080AC6B /* VNTankView.swift in Sources */,
 				ABBA101D1FCD52170080AC6B /* ViewController.swift in Sources */,
 				ABBA101B1FCD52170080AC6B /* AppDelegate.swift in Sources */,
 			);
