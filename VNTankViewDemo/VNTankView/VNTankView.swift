@@ -10,68 +10,17 @@ import UIKit
 @IBDesignable
 class VNTankView: UIView {
 
-    var view: UIView!
+    @IBOutlet var contentView: UIView!
     @IBOutlet weak var tankView: VNTank!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setUpView()
-        xibSetup()
+        commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        xibSetup()
-    }
-    
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-        self.setUpView()
-    }
-    
-    override public func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
-        updateView()
-    }
-    
-    func updateView() {
-            tankView.layer.borderColor = UIColor.white.cgColor
-            tankView.layer.borderWidth = 4
-        
-        
-        
-            layoutSubviews()
-    }
-    
-    func setUpView() {
-
-    }
-    
-    func xibSetup() {
-        view = loadViewFromNib()
-        view.backgroundColor = UIColor.clear
-        // use bounds not frame or it'll be offset
-        view.frame = bounds
-        view.backgroundColor = self.backgroundColor
-        // Make the view stretch with containing view
-        view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
-        // Adding custom subview on top of our view (over any custom drawing > see note below)
-        addSubview(view)
-        self.updateView()
-    }
-    
-    func loadViewFromNib() -> UIView {
-        
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "VNTankView", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        
-        return view
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        tankView.layer.cornerRadius = tankView.frame.width/2
+        commonInit()
     }
     
     fileprivate var tankFillColor:UIColor!
@@ -105,16 +54,31 @@ class VNTankView: UIView {
         }
     }
     
-//    @IBInspectable
-//    public var cornerRadius :CGFloat {
-//        set
-//        {
-//            layer.cornerRadius = newValue
-//        }
-//        get {
-//            return layer.cornerRadius
-//        }
-//    }
+    private func commonInit() {
+        Bundle.main.loadNibNamed("VNTankView", owner: self, options: nil)
+        addSubview(contentView)
+        contentView.frame = bounds
+        contentView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
+        contentView.isOpaque = false
+        self.isOpaque = false
+        updateView()
+    }
+    
+    func updateView() {
+        tankView.layer.borderColor = UIColor.white.cgColor
+        tankView.layer.borderWidth = 4
+        layoutSubviews()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        tankView.layer.cornerRadius = tankView.frame.width/2
+    }
     
    
 }
