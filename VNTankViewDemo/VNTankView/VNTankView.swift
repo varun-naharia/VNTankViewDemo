@@ -10,17 +10,68 @@ import UIKit
 @IBDesignable
 class VNTankView: UIView {
 
-    @IBOutlet var contentView: UIView!
+    var view: UIView!
     @IBOutlet weak var tankView: VNTank!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
+        self.setUpView()
+        xibSetup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
+        xibSetup()
+    }
+    
+    override public func awakeFromNib() {
+        super.awakeFromNib()
+        self.setUpView()
+    }
+    
+    override public func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        self.view.isOpaque = false
+        view.isOpaque = false
+        updateView()
+    }
+    
+    func updateView() {
+            tankView.layer.borderColor = UIColor.white.cgColor
+            tankView.layer.borderWidth = 4
+    }
+    
+    func setUpView() {
+
+    }
+    
+    func xibSetup() {
+        view = loadViewFromNib()
+        view.backgroundColor = UIColor.clear
+        // use bounds not frame or it'll be offset
+        view.frame = bounds
+        view.backgroundColor = self.backgroundColor
+        // Make the view stretch with containing view
+        view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        // Adding custom subview on top of our view (over any custom drawing > see note below)
+        addSubview(view)
+        view.isOpaque = false
+        self.isOpaque = false
+        self.updateView()
+    }
+    
+    func loadViewFromNib() -> UIView {
+        
+        let bundle = Bundle(for: type(of: self))
+        let nib = UINib(nibName: "VNTankView", bundle: bundle)
+        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
+        
+        return view
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        tankView.layer.cornerRadius = tankView.frame.width/2
     }
     
     fileprivate var tankFillColor:UIColor!
@@ -54,31 +105,16 @@ class VNTankView: UIView {
         }
     }
     
-    private func commonInit() {
-        Bundle.main.loadNibNamed("VNTankView", owner: self, options: nil)
-        addSubview(contentView)
-        contentView.frame = bounds
-        contentView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
-        contentView.isOpaque = false
-        self.isOpaque = false
-        updateView()
-    }
-    
-    func updateView() {
-        tankView.layer.borderColor = UIColor.white.cgColor
-        tankView.layer.borderWidth = 4
-        layoutSubviews()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-    }
-    
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        tankView.layer.cornerRadius = tankView.frame.width/2
-    }
+//    @IBInspectable
+//    public var cornerRadius :CGFloat {
+//        set
+//        {
+//            layer.cornerRadius = newValue
+//        }
+//        get {
+//            return layer.cornerRadius
+//        }
+//    }
     
    
 }
@@ -88,9 +124,8 @@ class VNTank: UIView {
     var percentage:CGFloat = 0.0
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-         //can declare as instance variable or globally which you get from web service and set it's value!!
-        let upperRect = CGRect(x: rect.origin.x, y: rect.origin.y, width: rect.size.width, height: rect.size.height*percentage)//CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height*percentage)
-        let lowerRect = CGRect(x: rect.origin.x, y: rect.origin.y + (rect.size.height * percentage), width: rect.size.width, height: rect.size.height*(1 - percentage))//CGRectMake(rect.origin.x, rect.origin.y + (rect.size.height * percentage), rect.size.width, rect.size.height * (1-percentage))
+        let upperRect = CGRect(x: rect.origin.x, y: rect.origin.y, width: rect.size.width, height: rect.size.height*percentage)
+        let lowerRect = CGRect(x: rect.origin.x, y: rect.origin.y + (rect.size.height * percentage), width: rect.size.width, height: rect.size.height*(1 - percentage))
         
         UIColor.clear.set()
         UIRectFill(upperRect)
