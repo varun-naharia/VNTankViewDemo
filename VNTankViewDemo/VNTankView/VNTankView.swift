@@ -83,6 +83,7 @@ class VNTankView: UIView {
         {
             fillPercentage = CGFloat(newValue)
             tankView.percentage = 1-fillPercentage
+            tankView.setNeedsDisplay()
         }
         get
         {
